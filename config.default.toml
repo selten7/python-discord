@@ -1,0 +1,13 @@
+[discord]
+token = ""
+
+[bot]
+prefix = "!"
+
+# Relative to config file.
+data = "./data.db"
+
+# These users will be automatically granted all permissions.
+mods = [
+  "000000000000000000"
+]
