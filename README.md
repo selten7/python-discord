@@ -1,0 +1,5 @@
+# python-lolicon
+
+## License
+
+Apache 2.0
