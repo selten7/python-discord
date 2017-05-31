@@ -15,6 +15,8 @@ from lolicon.command import Command
 from lolicon.logger import l
 from lolicon.user import User, DEFAULT_PERMISSIONS
 
+USER_AGENT = 'Lolicon/master (https://github.com/selten7/python-lolicon)'
+
 class WTF(Exception):
     pass
 
@@ -40,7 +42,7 @@ def init_database(db_file):
 
 def upload_image(url, name):
     headers = {
-        'User-Agent': 'Lolicon/master (https://github.com/selten7/python-lolicon)'
+        'User-Agent': USER_AGENT,
     }
 
     req = urllib.request.Request(
@@ -195,7 +197,59 @@ class Lolicon:
         #
         # Command handling.
         #
-        if cmd.name == 'ping' and user.has_permission('ping'):
+        if cmd.name == 'help':
+            prefix = self.config['bot']['prefix']
+
+            embed = discord.Embed(
+                title='Lolicon',
+                description='List of commands supported by Lolicon',
+                url='https://github.com/selten7/python-lolicon',
+                type='rich'
+            )
+
+            embed.set_thumbnail(url='https://raw.githubusercontent.com/selten7/python-lolicon/master/media/embed-thumbnail.png')
+
+            embed.add_field(
+                name=prefix + 'help',
+                value='Show this help message',
+                inline=False
+            )
+
+            if user.has_permission('use_tags'):
+                embed.add_field(
+                    name=prefix + '!<name>',
+                    value='Display the value for the tag `<name>`.',
+                    inline=False
+                )
+
+            if user.has_permission('modify_tags'):
+                embed.add_field(
+                    name=prefix + 'tag set <name> <value>',
+                    value='Set `<value>` to the tag `<name>`. `<name>` must not contain spaces.',
+                    inline=False
+                )
+
+                embed.add_field(
+                    name=prefix + 'tag del <name>',
+                    value='Delete the tag `<name>`.',
+                    inline=False
+                )
+
+            if user.has_permission('kudos'):
+                embed.add_field(
+                    name=prefix + 'kudos <user>',
+                    value='Add 1 "kudo" to `<user>` (must be a mention).',
+                    inline=False
+                )
+
+                embed.add_field(
+                    name=prefix + 'damedesu <user>',
+                    value='Remove 1 "kudo" from `<user>` (must be a mention).',
+                    inline=False
+                )
+
+            await self.client.send_message(message.channel, embed=embed)
+        elif cmd.name == 'ping' and user.has_permission('ping'):
             await self.client.send_message(message.channel, 'pong')
         elif cmd.name == 'tag':
             args = cmd.trailing.split()
