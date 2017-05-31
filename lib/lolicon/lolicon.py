@@ -202,7 +202,7 @@ class Lolicon:
 
             embed = discord.Embed(
                 title='Lolicon',
-                description='List of commands supported by Lolicon',
+                description='List of commands supported by Lolicon.',
                 url='https://github.com/selten7/python-lolicon',
                 type='rich'
             )
