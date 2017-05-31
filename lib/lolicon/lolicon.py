@@ -207,7 +207,7 @@ class Lolicon:
                 type='rich'
             )
 
-            embed.set_thumbnail(url='https://raw.githubusercontent.com/selten7/python-lolicon/master/media/embed-thumbnail.png')
+            embed.set_thumbnail(url='https://raw.githubusercontent.com/selten7/python-lolicon/master/media/embed-thumbnail.jpg')
 
             embed.add_field(
                 name=prefix + 'help',
