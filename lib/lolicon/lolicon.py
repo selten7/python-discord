@@ -222,6 +222,12 @@ class Lolicon:
                     inline=False
                 )
 
+                embed.add_field(
+                    name=prefix + 'tag list',
+                    value='Show a list of available tags.',
+                    inline=False
+                )
+
             if user.has_permission('modify_tags'):
                 embed.add_field(
                     name=prefix + 'tag set <name> <value>',
